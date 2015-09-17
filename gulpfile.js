@@ -15,7 +15,7 @@ gulp.task('distLess', function () {
         .pipe(less({
             paths: [ path.join(__dirname, '/node_modules/bootstrap/less') ]
         }))
-        .pipe(gulp.dest(path.join(__dirname, '/dist/css')));
+        .pipe(gulp.dest(path.join(__dirname, '/public/css')));
 });
 
 gulp.task('srcLess', function () {
@@ -31,13 +31,13 @@ gulp.task('html', ['distLess'], function() {
         .pipe(minifyHTML({
             quotes: true
         }))
-        .pipe(gulp.dest(path.join(__dirname, '/dist')));
+        .pipe(gulp.dest(path.join(__dirname, '/public')));
 });
 
 gulp.task('distCss', ['html'], function() {
-    return gulp.src(path.join(__dirname, '/dist/css/*.css'))
+    return gulp.src(path.join(__dirname, '/public/css/*.css'))
         .pipe(uncss({
-            html: [path.join(__dirname, '/dist/index.html')]
+            html: [path.join(__dirname, '/public/index.html')]
         }))
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
@@ -46,7 +46,7 @@ gulp.task('distCss', ['html'], function() {
         .pipe(minifyCSS({
             keepSpecialComments: 0
         }))
-        .pipe(gulp.dest(path.join(__dirname, '/dist/css')));
+        .pipe(gulp.dest(path.join(__dirname, '/public/css')));
 });
 
 gulp.task('srcCss', ['srcLess'], function() {
