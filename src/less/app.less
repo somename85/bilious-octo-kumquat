@@ -1,16 +1,109 @@
-@import (inline) '../../node_modules/bootstrap/dist/css/bootstrap.css';
-@import (inline) '../../node_modules/bootstrap/dist/css/bootstrap-theme.css';
+@import (less) '../../node_modules/bootstrap/less/bootstrap.less';
+
+body {
+    .container-fluid();
+    .make-row();
+}
 
 .schedule {
-  &_title {
+    .make-lg-column(6);
+    .make-lg-column-offset(3);
 
-  }
+    &_title {
+        .h1();
+        .text-center();
+    }
 
-  &_list {
+    &_list {
+        .list-unstyled();
 
-  }
+        margin-top: 60px;
+    }
 
-  &_list-i {
+    &_list-i {
+        .make-row();
 
-  }
+        margin: 20px 0;
+    }
+
+    &_date {
+        .make-lg-column(6);
+        .make-lg-column-offset(2);
+
+        // like &_subscribe-btn, for vertical align
+        padding: 7px 0;
+        line-height: 1.43;
+    }
+
+    &_subscribe-btn {
+        .make-lg-column(2);
+
+        .btn();
+        .btn-default();
+    }
+}
+
+.subscribe-window {
+    .make-lg-column(6);
+    .make-lg-column-offset(3);
+
+    &_form {
+        .text-center();
+        //.form-horizontal();
+
+        border: 1px solid #555555;
+        padding: 20px;
+    }
+
+    &_title {
+        .h6();
+
+        position: absolute;
+        top: -10px;
+        padding: 4px;
+        margin: 0;
+        background: #ffffff;
+    }
+
+    &_info {
+        .lead();
+    }
+
+    &_inputs {
+        overflow: auto;
+    }
+
+    &_input {
+        .form-control();
+        .make-lg-column(6);
+        .make-lg-column-offset(3);
+
+        margin: 10px 0;
+    }
+
+    &_subscribe-btn {
+        .btn();
+        .btn-default();
+        .btn-lg();
+    }
+}
+
+.share-window {
+    .make-lg-column(6);
+    .make-lg-column-offset(3);
+    .text-center();
+
+    &_link {
+        display: block;
+        margin: 100px 0;
+    }
+
+    &_call-to-action {
+        margin: 40px 0;
+    }
+
+    &_btn {
+        .btn();
+        .btn-default();
+    }
 }

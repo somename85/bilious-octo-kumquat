@@ -6,16 +6,42 @@ const gulp = require('gulp');
 const less = require('gulp-less');
 const minifyCSS = require('gulp-minify-css');
 const uncss = require('gulp-uncss');
+const autoprefixer = require('gulp-autoprefixer');
 
 const minifyHTML = require('gulp-minify-html');
 
-gulp.task('less', function () {
+gulp.task('distLess', function () {
     return gulp.src(path.join(__dirname, '/src/less/*.less'))
         .pipe(less({
-            paths: [ path.join(__dirname, '/node_modules/bootstrap/dist') ]
+            paths: [ path.join(__dirname, '/node_modules/bootstrap/less') ]
         }))
+        .pipe(gulp.dest(path.join(__dirname, '/dist/css')));
+});
+
+gulp.task('srcLess', function () {
+    return gulp.src(path.join(__dirname, '/src/less/*.less'))
+        .pipe(less({
+            paths: [ path.join(__dirname, '/node_modules/bootstrap/less') ]
+        }))
+        .pipe(gulp.dest(path.join(__dirname, '/src/css')));
+});
+
+gulp.task('html', ['distLess'], function() {
+    return gulp.src(path.join(__dirname, '/src/*.html'))
+        .pipe(minifyHTML({
+            quotes: true
+        }))
+        .pipe(gulp.dest(path.join(__dirname, '/dist')));
+});
+
+gulp.task('distCss', ['html'], function() {
+    return gulp.src(path.join(__dirname, '/dist/css/*.css'))
         .pipe(uncss({
-            html: path.join(__dirname, '/src/index.html')
+            html: [path.join(__dirname, '/dist/index.html')]
+        }))
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
         }))
         .pipe(minifyCSS({
             keepSpecialComments: 0
@@ -23,10 +49,15 @@ gulp.task('less', function () {
         .pipe(gulp.dest(path.join(__dirname, '/dist/css')));
 });
 
-gulp.task('html', function() {
-    return gulp.src(path.join(__dirname, '/src/*.html'))
-        .pipe(minifyHTML())
-        .pipe(gulp.dest(path.join(__dirname, '/dist')));
+gulp.task('srcCss', ['srcLess'], function() {
+    return gulp.src(path.join(__dirname, '/src/css/*.css'))
+        .pipe(uncss({
+            html: [path.join(__dirname, '/src/index.html')]
+        }))
+        .pipe(gulp.dest(path.join(__dirname, '/src/css')));
 });
 
-gulp.task('default', ['less', 'html']);
+
+
+gulp.task('dist', ['distCss']);
+gulp.task('src', ['srcCss']);
