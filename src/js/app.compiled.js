@@ -3781,9 +3781,9 @@
 /***/ function(module, exports) {
 
 	module.exports = {
-		"Application ID": "ofKHQsx2L3VB80XbMvcJjr9T4jk1EBSt51F24pwi",
-		"JavaScript Key": "Qdr65b8z0fMfc63HHMcPNkjViPhdVudlSautrd5D",
-		"REST API Key": "IZ58OatuTdkFwd4EUPswKLRmFKV1imvYN7bmhdp5",
+		"Application ID": "FG1SSGWEmX7PW6K1PHkDKnxp1R96KkmzPCMMlfDO",
+		"JavaScript Key": "LdhsDf4j4QrUeY3MRj9upuYfD2qN8JBtdHANa5Jo",
+		"REST API Key": "3Qjayza3QrNMWogGp2bSCwYaRczN0x2COhSVMOsw",
 		"REST API Version": "1"
 	};
 
@@ -16701,7 +16701,13 @@
 
 	    render: function render() {
 	        var jsonModel = this.model.toJSON();
+
 	        jsonModel.addToGoogleCalendarUrl = this.createUrlForGoogleCalendar(jsonModel);
+
+	        jsonModel.name = encodeURIComponent(jsonModel.name);
+
+	        jsonModel.shareUrl = jsonModel.shareUrl || window.location.href.split('?')[0];
+	        jsonModel.shareUrl = encodeURIComponent(jsonModel.shareUrl);
 
 	        this.el.innerHTML = this.template(jsonModel);
 	        return this;

@@ -15,7 +15,13 @@ const ShareView = Backbone.NativeView.extend({
 
     render() {
         let jsonModel = this.model.toJSON();
+
         jsonModel.addToGoogleCalendarUrl = this.createUrlForGoogleCalendar(jsonModel);
+
+        jsonModel.name = encodeURIComponent(jsonModel.name);
+
+        jsonModel.shareUrl = jsonModel.shareUrl || window.location.href.split('?')[0];
+        jsonModel.shareUrl = encodeURIComponent(jsonModel.shareUrl);
 
         this.el.innerHTML = this.template(jsonModel);
         return this;

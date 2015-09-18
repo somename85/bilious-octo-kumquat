@@ -20,34 +20,10 @@ section {
   display: block;
 }
 
-a {
-  background-color: transparent;
-}
-
-a:active,
-a:hover {
-  outline: 0;
-}
-
-input {
-  color: inherit;
-  font: inherit;
-  margin: 0;
-}
-
-input[type="submit"] {
-  -webkit-appearance: button;
-  cursor: pointer;
-}
-
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
   padding: 0;
-}
-
-input {
-  line-height: normal;
 }
 
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
@@ -60,15 +36,6 @@ input {
     color: #000 !important;
     box-shadow: none !important;
     text-shadow: none !important;
-  }
-
-  a,
-  a:visited {
-    text-decoration: underline;
-  }
-
-  a[href]:after {
-    content: " (" attr(href) ")";
   }
 
   h2 {
@@ -111,29 +78,6 @@ body {
   line-height: 1.42857143;
   color: #333333;
   background-color: #ffffff;
-}
-
-input {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-}
-
-a {
-  color: #337ab7;
-  text-decoration: none;
-}
-
-a:hover,
-a:focus {
-  color: #23527c;
-  text-decoration: underline;
-}
-
-a:focus {
-  outline: thin dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-  outline-offset: -2px;
 }
 
 h2 {
@@ -680,7 +624,8 @@ body {
 }
 
 .share-window_link {
-  display: block;
+  color: #337ab7;
+  display: inline-block;
   margin: 100px 0;
   cursor: pointer;
 }
@@ -711,6 +656,7 @@ body {
   color: #333333;
   background-color: #ffffff;
   border-color: #cccccc;
+  text-decoration: none;
 }
 
 .share-window_btn:focus,
