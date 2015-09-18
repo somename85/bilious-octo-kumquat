@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "gulp src && node webpack.build.js src",
+    "prod": "gulp dist && node webpack.build.js public"
   },
   "author": "",
   "license": "MIT",
