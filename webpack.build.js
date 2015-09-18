@@ -92,6 +92,11 @@ function createConfig(target) {
                 moment: 'moment-timezone',
                 'Backbone.NativeView': 'backbone.nativeview',
                 'Backbone.NativeAjax': 'backbone.nativeajax'
+            }),
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    warnings: false
+                }
             })
         ]
     };
