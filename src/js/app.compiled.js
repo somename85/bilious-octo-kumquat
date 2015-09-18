@@ -4041,7 +4041,6 @@
 	    },
 
 	    initialize: function initialize() {
-	        this.model.bind('change', this.render);
 	        this.model.bind('destroy', this.remove);
 	    },
 
@@ -4064,7 +4063,7 @@
 
 	    showSubscribeWindow: function showSubscribeWindow() {
 	        this.model.trigger('subscribe');
-	        new _subscribeView2['default'](this.model);
+	        document.body.appendChild(new _subscribeView2['default']({ model: this.model }).render().el);
 	    }
 	});
 
@@ -16570,7 +16569,7 @@
 /* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(__webpack_provided_Backbone_dot_NativeView, _) {'use strict';
+	/* WEBPACK VAR INJECTION */(function(__webpack_provided_Backbone_dot_NativeView, _, moment) {'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
@@ -16578,12 +16577,84 @@
 	var subscribeViewTemplateEl = document.getElementById('subscribe-window-template');
 
 	var SubscribeView = __webpack_provided_Backbone_dot_NativeView.extend({
-	    template: _.template(subscribeViewTemplateEl.innerHTML)
+	    template: _.template(subscribeViewTemplateEl.innerHTML),
+
+	    className: 'subscribe-window',
+
+	    tagName: 'section',
+
+	    events: {
+	        'click #subscribe-window_subscribe-btn': 'addParticipant'
+	    },
+
+	    initialize: function initialize() {
+	        this.model.bind('destroy', this.remove);
+	    },
+
+	    getFirstName: function getFirstName() {
+	        if (!this._fistNameInput) {
+	            this._fistNameInput = document.querySelector('.' + this.className + ' input[name="first-name"]');
+	        }
+
+	        return this._fistNameInput.value;
+	    },
+
+	    getLastName: function getLastName() {
+	        if (!this._lastNameInput) {
+	            this._lastNameInput = document.querySelector('.' + this.className + ' input[name="last-name"]');
+	        }
+
+	        return this._lastNameInput.value;
+	    },
+
+	    getEmail: function getEmail() {
+	        if (!this._emailInput) {
+	            this._emailInput = document.querySelector('.' + this.className + ' input[name="email"]');
+	        }
+
+	        return this._emailInput.value;
+	    },
+
+	    getPhone: function getPhone() {
+	        if (!this._phoneInput) {
+	            this._phoneInput = document.querySelector('.' + this.className + ' input[name="phone"]');
+	        }
+
+	        return this._phoneInput.value;
+	    },
+
+	    render: function render() {
+	        var jsonModel = this.model.toJSON();
+	        jsonModel.date = this.setTimeZoneToCLT(jsonModel.date);
+	        jsonModel.date = this.formatDate(jsonModel.date);
+
+	        this.el.innerHTML = this.template(jsonModel);
+	        return this;
+	    },
+
+	    formatDate: function formatDate(momentjsObj) {
+	        return momentjsObj.format('MMMM Do [at] HH[h]mm z');
+	    },
+
+	    setTimeZoneToCLT: function setTimeZoneToCLT(parseDateObj) {
+	        return moment(parseDateObj.iso).tz('America/Santiago');
+	    },
+
+	    addParticipant: function addParticipant() {
+	        var participant = {
+	            firstName: this.getFirstName(),
+	            lastName: this.getLastName(),
+	            email: this.getEmail(),
+	            phone: this.getPhone()
+	        };
+
+	        this.model.subscribe(participant);
+	    }
 	});
 
 	exports['default'] = SubscribeView;
 	module.exports = exports['default'];
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(3)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(3), __webpack_require__(8)))
 
 /***/ },
 /* 100 */

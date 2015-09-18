@@ -34,11 +34,7 @@
 </script>
 
 <script type="text/template" id="subscribe-window-template">
-
-</script>
-
-<section class="subscribe-window">
-    <form action="" class="subscribe-window_form">
+    <div class="subscribe-window_form">
         <h2 class="subscribe-window_title">
             Sign-up for the Webinar
         </h2>
@@ -46,23 +42,24 @@
         <div class="subscribe-window_info">
             You are signing up to attend the webinar on
             <br/>
-            August 24th at 18h00.
+            <%= date %>.
             <br/>
             It`s free.
         </div>
 
         <div class="subscribe-window_inputs">
-            <input type="text" placeholder="First Name" class="subscribe-window_input"/>
-            <input type="text" placeholder="Last Name" class="subscribe-window_input"/>
-            <input type="email" placeholder="Email" class="subscribe-window_input"/>
-            <input type="text" placeholder="Phone" class="subscribe-window_input"/>
+            <input type="text" placeholder="First Name" class="subscribe-window_input" name="first-name" id="fn"/>
+            <input type="text" placeholder="Last Name" class="subscribe-window_input" name="last-name"/>
+            <input type="email" placeholder="Email" class="subscribe-window_input" name="email"/>
+            <input type="text" placeholder="Phone" class="subscribe-window_input" name="phone"/>
         </div>
 
-        <input type="submit" class="subscribe-window_subscribe-btn"/>
-    </form>
-</section>
+        <input type="submit" class="subscribe-window_subscribe-btn" id="subscribe-window_subscribe-btn"/>
+    </div>
+</script>
 
-<section class="share-window">
+
+<!--<section class="share-window">
     <a href="" class="share-window_link">
         Save to Google Calendar
     </a>
@@ -78,7 +75,7 @@
     <span class="share-window_btn">
         Twitter
     </span>
-</section>
+</section>-->
 
 <script src="./js/app.compiled.js"></script>
 </body>

@@ -14,7 +14,6 @@ const WebinarView = Backbone.NativeView.extend({
     },
 
     initialize() {
-        this.model.bind('change', this.render);
         this.model.bind('destroy', this.remove);
     },
 
@@ -37,7 +36,7 @@ const WebinarView = Backbone.NativeView.extend({
 
     showSubscribeWindow() {
         this.model.trigger('subscribe');
-        new SubscribeView(this.model);
+        document.body.appendChild(new SubscribeView({model: this.model}).render().el);
     }
 });
 
