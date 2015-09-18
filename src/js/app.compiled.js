@@ -16679,7 +16679,7 @@
 /* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(__webpack_provided_Backbone_dot_NativeView, _) {'use strict';
+	/* WEBPACK VAR INJECTION */(function(__webpack_provided_Backbone_dot_NativeView, _, moment) {'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
@@ -16700,14 +16700,44 @@
 	    },
 
 	    render: function render() {
-	        this.el.innerHTML = this.template(this.model.toJSON());
+	        var jsonModel = this.model.toJSON();
+	        jsonModel.addToGoogleCalendarUrl = this.createUrlForGoogleCalendar(jsonModel);
+
+	        this.el.innerHTML = this.template(jsonModel);
 	        return this;
+	    },
+
+	    createUrlForGoogleCalendar: function createUrlForGoogleCalendar(jsonModel) {
+	        var dates = this.createDatesForGoogleCalendar(jsonModel.date, jsonModel.durationInMilliseconds);
+
+	        var name = this.replaceSpacesWithPluses(jsonModel.name);
+	        var description = this.replaceSpacesWithPluses(jsonModel.description);
+	        var location = this.replaceSpacesWithPluses(jsonModel.location);
+
+	        return 'https://www.google.com/calendar/render?action=TEMPLATE' + ('&text=' + name) + ('&dates=' + dates.start + '/' + dates.end) + ('&details=' + description) + ('&location=' + location) + '&sf=true&output=xml';
+	    },
+
+	    replaceSpacesWithPluses: function replaceSpacesWithPluses(string) {
+	        return string.split(' ').join('+');
+	    },
+
+	    createDatesForGoogleCalendar: function createDatesForGoogleCalendar(parseDateObj, millisecondsDuration) {
+	        var start = moment(parseDateObj.iso).utc().format('GGGGMMDD[T]HHmmss[Z]');
+
+	        var end = new Date(parseDateObj.iso);
+	        end.setMilliseconds(end.getMilliseconds() + millisecondsDuration);
+	        end = moment(end).utc().format('GGGGMMDD[T]HHmmss[Z]');
+
+	        return {
+	            start: start,
+	            end: end
+	        };
 	    }
 	});
 
 	exports['default'] = ShareView;
 	module.exports = exports['default'];
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(3)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(3), __webpack_require__(8)))
 
 /***/ },
 /* 101 */
@@ -16747,7 +16777,11 @@
 	var Webinar = Backbone.Model.extend({
 	    defaults: {
 	        participants: [],
-	        date: new Date().setHours(18)
+	        date: new Date().setHours(18),
+	        durationInMilliseconds: 1000 * 60 * 60,
+	        name: 'Default name.',
+	        description: 'Default description.',
+	        location: 'Default location.'
 	    },
 
 	    _parse_class_name: 'webinar',
