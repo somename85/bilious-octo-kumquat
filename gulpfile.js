@@ -10,6 +10,8 @@ const autoprefixer = require('gulp-autoprefixer');
 
 const minifyHTML = require('gulp-minify-html');
 
+const ignoreSelectorsRegExp = /^\.?(schedule|subscribe-window|share-window).*/;
+
 gulp.task('distLess', function () {
     return gulp.src(path.join(__dirname, '/src/less/*.less'))
         .pipe(less({
@@ -37,6 +39,7 @@ gulp.task('html', ['distLess'], function() {
 gulp.task('distCss', ['html'], function() {
     return gulp.src(path.join(__dirname, '/public/css/*.css'))
         .pipe(uncss({
+            ignore: [ignoreSelectorsRegExp],
             html: [path.join(__dirname, '/public/index.html')]
         }))
         .pipe(autoprefixer({
@@ -52,6 +55,7 @@ gulp.task('distCss', ['html'], function() {
 gulp.task('srcCss', ['srcLess'], function() {
     return gulp.src(path.join(__dirname, '/src/css/*.css'))
         .pipe(uncss({
+            ignore: [ignoreSelectorsRegExp],
             html: [path.join(__dirname, '/src/index.html')]
         }))
         .pipe(gulp.dest(path.join(__dirname, '/src/css')));
