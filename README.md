@@ -7,3 +7,9 @@
 `parse deploy`
 
 Navigate to http://somename85.parseapp.com/
+
+### Todo list
+ - sort webinars by date
+ - validation
+ - router
+ - bind enter key to form submitting
