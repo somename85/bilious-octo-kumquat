@@ -6,6 +6,7 @@ const WebinarsView = Backbone.NativeView.extend({
 
     list: document.getElementById('webinars-list'),
 
+
     initialize() {
         this.webinars = new Webinars();
 
