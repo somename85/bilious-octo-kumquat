@@ -567,6 +567,7 @@ body {
 .share-window_link {
   display: block;
   margin: 100px 0;
+  cursor: pointer;
 }
 
 .share-window_call-to-action {
