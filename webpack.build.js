@@ -91,8 +91,7 @@ function createConfig(target) {
                 _: 'underscore',
                 moment: 'moment-timezone',
                 'Backbone.NativeView': 'backbone.nativeview',
-                'Backbone.NativeAjax': 'backbone.nativeajax',
-                Parse: 'parse'
+                'Backbone.NativeAjax': 'backbone.nativeajax'
             })
         ]
     };

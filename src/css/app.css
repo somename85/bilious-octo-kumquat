@@ -421,8 +421,10 @@ body {
 
 .subscribe-window_form {
   text-align: center;
-  border: 1px solid #555555;
+  position: relative;
   padding: 20px;
+  margin: 10px;
+  border: 1px solid #555555;
 }
 
 .subscribe-window_title {
