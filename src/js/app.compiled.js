@@ -3803,7 +3803,7 @@
 
 	var _webinar2 = _interopRequireDefault(_webinar);
 
-	var _collectionsWebinars = __webpack_require__(100);
+	var _collectionsWebinars = __webpack_require__(101);
 
 	var _collectionsWebinars2 = _interopRequireDefault(_collectionsWebinars);
 
@@ -3816,7 +3816,7 @@
 	        this.webinars = new _collectionsWebinars2['default']();
 
 	        this.listenTo(this.webinars, 'reset', this.showWebinars);
-	        this.listenTo(this.webinars, 'subscribe', this.remove);
+	        this.listenTo(this.webinars, 'showSubscribeView', this.remove);
 
 	        this.webinars.fetch({ reset: true });
 	    },
@@ -4023,9 +4023,9 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _subscribeView = __webpack_require__(99);
+	var _webinarSubscribeView = __webpack_require__(99);
 
-	var _subscribeView2 = _interopRequireDefault(_subscribeView);
+	var _webinarSubscribeView2 = _interopRequireDefault(_webinarSubscribeView);
 
 	var webinarTemplateEl = document.getElementById('webinar-template');
 
@@ -4062,8 +4062,10 @@
 	    },
 
 	    showSubscribeWindow: function showSubscribeWindow() {
-	        this.model.trigger('subscribe');
-	        document.body.appendChild(new _subscribeView2['default']({ model: this.model }).render().el);
+	        this.model.trigger('showSubscribeView');
+
+	        var view = new _webinarSubscribeView2['default']({ model: this.model });
+	        document.body.appendChild(view.render().el);
 	    }
 	});
 
@@ -16574,6 +16576,13 @@
 	Object.defineProperty(exports, '__esModule', {
 	    value: true
 	});
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _webinarShareView = __webpack_require__(100);
+
+	var _webinarShareView2 = _interopRequireDefault(_webinarShareView);
+
 	var subscribeViewTemplateEl = document.getElementById('subscribe-window-template');
 
 	var SubscribeView = __webpack_provided_Backbone_dot_NativeView.extend({
@@ -16589,6 +16598,7 @@
 
 	    initialize: function initialize() {
 	        this.model.bind('destroy', this.remove);
+	        this.listenTo(this.model, 'showShareView', this.remove);
 	    },
 
 	    getFirstName: function getFirstName() {
@@ -16649,6 +16659,15 @@
 	        };
 
 	        this.model.subscribe(participant);
+
+	        this.showShareView();
+	    },
+
+	    showShareView: function showShareView() {
+	        this.model.trigger('showShareView');
+
+	        var view = new _webinarShareView2['default']({ model: this.model });
+	        document.body.appendChild(view.render().el);
 	    }
 	});
 
@@ -16660,6 +16679,40 @@
 /* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function(__webpack_provided_Backbone_dot_NativeView, _) {'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	var shareViewTemplateEl = document.getElementById('share-window-template');
+
+	var ShareView = __webpack_provided_Backbone_dot_NativeView.extend({
+	    template: _.template(shareViewTemplateEl.innerHTML),
+
+	    className: 'share-window',
+
+	    tagName: 'section',
+
+	    events: {},
+
+	    initialize: function initialize() {
+	        this.model.bind('destroy', this.remove);
+	    },
+
+	    render: function render() {
+	        this.el.innerHTML = this.template(this.model.toJSON());
+	        return this;
+	    }
+	});
+
+	exports['default'] = ShareView;
+	module.exports = exports['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(3)))
+
+/***/ },
+/* 101 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(Backbone) {'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
@@ -16668,7 +16721,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _modelsWebinar = __webpack_require__(101);
+	var _modelsWebinar = __webpack_require__(102);
 
 	var _modelsWebinar2 = _interopRequireDefault(_modelsWebinar);
 
@@ -16683,7 +16736,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 101 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(Backbone) {'use strict';

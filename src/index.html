@@ -12,18 +12,10 @@
         An introduction to Investing in Startups
     </h2>
 
-    <ul class="schedule_list" id="webinars-list">
-        <!--<li class="schedule_list-i">
-            <span class="schedule_date">
-                Monday 24 August - 18h00 CLT
-            </span>
-            <button class="schedule_subscribe-btn">
-                Attend Free
-            </button>
-        </li>-->
-    </ul>
+    <ul class="schedule_list" id="webinars-list"></ul>
 </section>
 
+<!-- template parent tagName: "li", className: "schedule_list-i" -->
 <script type="text/template" id="webinar-template">
     <span class="schedule_date">
         <%= date %>
@@ -33,6 +25,7 @@
     </button>
 </script>
 
+<!-- template parent tagName: "section", className: "subscribe-window" -->
 <script type="text/template" id="subscribe-window-template">
     <div class="subscribe-window_form">
         <h2 class="subscribe-window_title">
@@ -58,8 +51,8 @@
     </div>
 </script>
 
-
-<!--<section class="share-window">
+<!-- template parent tagName: "section", className: "share-window" -->
+<script type="text/template" id="share-window-template">
     <a href="" class="share-window_link">
         Save to Google Calendar
     </a>
@@ -75,7 +68,7 @@
     <span class="share-window_btn">
         Twitter
     </span>
-</section>-->
+</script>
 
 <script src="./js/app.compiled.js"></script>
 </body>

@@ -1,4 +1,4 @@
-import SubscribeView from './subscribeView';
+import SubscribeView from './webinarSubscribeView';
 
 const webinarTemplateEl = document.getElementById('webinar-template');
 
@@ -35,8 +35,10 @@ const WebinarView = Backbone.NativeView.extend({
     },
 
     showSubscribeWindow() {
-        this.model.trigger('subscribe');
-        document.body.appendChild(new SubscribeView({model: this.model}).render().el);
+        this.model.trigger('showSubscribeView');
+
+        const view = new SubscribeView({model: this.model});
+        document.body.appendChild(view.render().el);
     }
 });
 

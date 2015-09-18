@@ -10,7 +10,7 @@ const WebinarsView = Backbone.NativeView.extend({
         this.webinars = new Webinars();
 
         this.listenTo(this.webinars, 'reset', this.showWebinars);
-        this.listenTo(this.webinars, 'subscribe', this.remove);
+        this.listenTo(this.webinars, 'showSubscribeView', this.remove);
 
         this.webinars.fetch({ reset: true });
     },

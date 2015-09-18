@@ -1,3 +1,5 @@
+import ShareView from './webinarShareView';
+
 const subscribeViewTemplateEl = document.getElementById('subscribe-window-template');
 
 const SubscribeView = Backbone.NativeView.extend({
@@ -13,6 +15,7 @@ const SubscribeView = Backbone.NativeView.extend({
 
     initialize() {
         this.model.bind('destroy', this.remove);
+        this.listenTo(this.model, 'showShareView', this.remove);
     },
 
     getFirstName() {
@@ -73,6 +76,15 @@ const SubscribeView = Backbone.NativeView.extend({
         };
 
         this.model.subscribe(participant);
+
+        this.showShareView();
+    },
+
+    showShareView() {
+        this.model.trigger('showShareView');
+
+        const view = new ShareView({model: this.model});
+        document.body.appendChild(view.render().el);
     }
 });
 
